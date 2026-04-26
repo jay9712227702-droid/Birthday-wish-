@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Birthday, Hiruuuuuuuu 🎉</title>
+  <meta name="description" content="A sweet birthday quiz for my love Hiruuuuuuuu 🎂❤️">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
+    body {
+      background: linear-gradient(135deg, #ffe9ec, #f8d7e1, #f5c9e8);
+      background-image:
+        radial-gradient(2px 2px at 25px 25px, #ff6b9d 0, #ff6b9d 50%, transparent 50%),
+        radial-gradient(2px 2px at 75px 75px, #ff6b9d 0, #ff6b9d 50%, transparent 50%),
+        radial-gradient(2px 2px at 50px 50px, #ff6b9d 0, #ff6b9d 50%, transparent 50%);
+      background-size: 100px 100px;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: #333;
+      overflow-y: auto;
+      position: relative;
+    }
+    .heart-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(10px 10px at 30px 30px, #ff6b9d 0, #ff6b9d 50%, transparent 50%),
+        radial-gradient(10px 10px at 80px 80px, #ff6b9d 0, #ff6b9d 50%, transparent 50%),
+        radial-gradient(10px 10px at 50px 50px, #ff6b9d 0, #ff6b9d 50%, transparent 50%);
+      background-size: 120px 120px;
+      background-position: 0 0, 60px 60px;
+      opacity: 0.1;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .page {
+      width: 90%;
+      max-width: 500px;
+      padding: 30px 20px;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      box-shadow: 0 15px 40px rgba(233, 30, 99, 0.3);
+      margin: 15px auto;
+      position: relative;
+      display: none;
+      animation: fadeIn 0.8s ease-out;
+      z-index: 1;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .page.active {
+      display: block;
+    }
+    h1 {
+      color: #e91e63;
+      margin-bottom: 15px;
+      font-size: 24px;
+    }
+    h2 {
+      color: #666;
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+    .btn {
+      padding: 12px 20px;
+      margin: 8px 6px;
+      border-radius: 12px;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      transition: transform 0.3s, background 0.3s;
+      background: #e91e63;
+      color: white;
+      display: inline-block;
+      position: relative;
+    }
+    .btn.angry {
+      background: #c62828;
+    }
+    .btn:hover {
+      transform: scale(1.05);
+    }
+    .btn.no {
+      background: #555;
+      color: #fff;
+      position: absolute;
+      top: 10px;
+    }
+    .btn.no:hover {
+      transform: translate(0, 0) !important;
+    }
+    .img-btn {
+      display: inline-block;
+      margin: 5px;
+    }
+    .img-btn img {
+      width: 50px;
+      height: 50px;
+      margin-bottom: 5px;
+      border-radius: 10px;
+    }
+    .angry-cat {
+      background: rgba(255, 238, 241, 0.95);
+      padding: 40px 20px;
+      text-align: center;
+      box-shadow: 0 15px 40px rgba(233, 30, 99, 0.4);
+    }
+    .angry-cat h2 {
+      color: #c62828;
+      margin: 15px 0;
+    }
+    .angry-cat img {
+      width: 120px;
+      margin: 15px 0;
+    }
+    .quote-box {
+      margin-top: 15px;
+      padding: 15px;
+      background: rgba(255, 240, 248, 0.7);
+      border-radius: 12px;
+      font-size: 15px;
+      color: #555;
+      line-height: 1.5;
+      border: 1px solid rgba(233, 30, 99, 0.1);
+    }
+    .confetti {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .bottom-msg {
+      margin-top: 10px;
+      font-size: 12px;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <audio id="bgMusic" loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    Your browser does not support audio.
+  </audio>
+  <div class="heart-overlay"></div>
+
+  <div id="page1" class="page active">
+    <h1>Happy Birthday, My Sweetheart Hiruuuuuuuu 🎉</h1>
+    <h2>Tap to start a cute birthday surprise quiz for you 💕</h2>
+    <button class="btn" onclick="playMusic(); showPage('page2')">Start</button>
+  </div>
+
+  <div id="page2" class="page">
+    <h1>Do you want a small surprise from me?</h1>
+    <div class="img-btn">
+      <img src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExaG1rZzRiZGdvZ3dpbHh3Z2xscTB6eGFtbHF4d2N1YW5jbWZ1cG1jZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/26BRv0QguEiGIuH2o/giphy.webp" alt="cute animal">
+      <button class="btn" onclick="showPage('page3')">Yes</button>
+    </div>
+    <div class="img-btn">
+      <img src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExaG1rZzRiZGdvZ3dpbHh3Z2lqYm16cHZibTdlZmp3ZnFzOGp1c25xNyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7TKsQ8UQ4XfRVjZC/giphy.webp" alt="cute animal">
+      <button class="btn" onclick="showPage('angry-cat')">No</button>
+    </div>
+  </div>
+
+  <div id="angry-cat" class="angry-cat page">
+    <h1>😻 How dare you say no!</h1>
+    <h2>My heart is breaking 😭</h2>
+    <img src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExZmxpZGpnMGI1cG5kZjZ0bTU4eHR3ZWN5bml1ZXF6OXZma2M4ZWZ4MyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7TKsQ8UQ4XfRVjZC/giphy.webp" alt="angry cat">
+    <button class="btn angry" onclick="showPage('page3')">YES (I’m sorry 🥺)</button>
+  </div>
+
+  <div id="page3" class="page">
+    <h1>Do you love me, Hiruuuuuuuu?</h1>
+    <div class="img-btn">
+      <img src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExaG1rZzRiZGdvZ3dpbHh3Z2xscTB6eGFtbHF4d2N1YW5jbWZ1cG1jZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/26BRv0QguEiGIuH2o/giphy.webp" alt="cute animal">
+      <button class="btn" id="yesLove">Yes</button>
+    </div>
+    <div class="img-btn">
+      <img id="noLoveGif" src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExaG1rZzRiZGdvZ3dpbHh3Z2lqYm16cHZibTdlZmp3ZnFzOGp1c25xNyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7TKsQ8UQ4XfRVjZC/giphy.webp" alt="cute animal">
+      <button class="btn no" id="noLove">No</button>
+    </div>
+  </div>
+
+  <div id="page4" class="page">
+    <h1>Do you know I love your smile, Hiruuuuuuuu?</h1>
+    <div class="img-btn">
+      <img src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExaG1rZzRiZGdvZ3dpbHh3Z2xscTB6eGFtbHF4d2N1YW5jbWZ1cG1jZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/26BRv0QguEiGIuH2o/giphy.webp" alt="cute animal">
+      <button class="btn" onclick="showPage('page5')">Yes</button>
+    </div>
+    <div class="img-btn">
+      <img src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExaG1rZzRiZGdvZ3dpbHh3Z2lqYm16cHZibTdlZmp3ZnFzOGp1c25xNyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7TKsQ8UQ4XfRVjZC/giphy.webp" alt="cute animal">
+      <button class="btn" onclick="showPage('page5')">No</button>
+    </div>
+  </div>
+
+  <div id="page5" class="page">
+    <h1>🎉 It’s your birthday, Hiruuuuuuuu!</h1>
+    <h2>Ready for the surprise? 🥳</h2>
+    <div>
+      <button class="btn" onclick="triggerConfetti(); showPage('page6')">YES</button>
+      <button class="btn" onclick="triggerConfetti(); showPage('page6')">Yes</button>
+      <button class="btn" onclick="triggerConfetti(); showPage('page6')">Yesss</button>
+      <button class="btn" onclick="triggerConfetti(); showPage('page6')">Of course!</button>
+      <button class="btn" onclick="triggerConfetti(); showPage('page6')">Absolutely!</button>
+    </div>
+  </div>
+
+  <div id="page6" class="page">
+    <h1>🎉 HAPPY BIRTHDAY, MY LOVE HIRUUUUUUUU! 🎂💕</h1>
+    <h2>You deserve all the love and happiness today</h2>
+    <div class="quote-box">
+      Thank you for being the most beautiful, kind, and strong person in my life.  
+      I fall in love with you more every single day, especially with your smile.
+    </div>
+    <div class="quote-box">
+      No matter what life brings, I will always be here for you,  
+      celebrating every moment, every laugh, and every dream.
+    </div>
+    <div class="quote-box">
+      I love you, Hiruuuuuuuu, now and forever.  
+      You are my world, my happiness, and my biggest blessing.
+    </div>
+  </div>
+
+  <canvas id="confetti-canvas" class="confetti"></canvas>
+
+  <script>
+    function showPage(id) {
+      document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+      document.getElementById(id).classList.add("active");
+    }
+    function playMusic() {
+      const audio = document.getElementById("bgMusic");
+      audio.play().catch(e => {
+        console.log("Audio autoplay blocked; user must interact first:", e);
+      });
+    }
+    const canvas = document.getElementById("confetti-canvas");
+    const ctx = canvas.getContext("2d");
+    const particles = [];
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+    function createConfetti() {
+      const colors = ["#e91e63", "#ff9800", "#4caf50", "#2196f3", "#9c27b0"];
+      for (let i = 0; i < 120; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: 0,
+          w: Math.random() * 5 + 3,
+          h: Math.random() * 8 + 5,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          angle: Math.random() * Math.PI * 2,
+          speed: Math.random() * 3 + 2,
+          weight: Math.random() * 0.5 + 0.3,
+        });
+      }
+    }
+    function updateConfetti() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        p.y += p.speed * p.weight;
+        p.speed *= 0.999;
+        p.x += Math.sin(p.angle) * 1.5;
+        p.angle += 0.02;
+        ctx.fillStyle = p.color;
+        ctx.fillRect(p.x, p.y, p.w, p.h);
+      });
+    }
+    function animateConfetti() {
+      updateConfetti();
+      if (particles.some(p => p.y < canvas.height)) {
+        requestAnimationFrame(animateConfetti);
+      }
+    }
+    function triggerConfetti() {
+      createConfetti();
+      animateConfetti();
+    }
+    const noBtn = document.getElementById("noLove");
+    noBtn.addEventListener("mouseover", function(e) {
+      const maxX = window.innerWidth - noBtn.offsetWidth - 20;
+      const maxY = window.innerHeight - noBtn.offsetHeight - 20;
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+      noBtn.style.position = "absolute";
+      noBtn.style.transform = "scale(1.05)";
+    });
+    document.getElementById("yesLove").addEventListener("click", function() {
+      showPage("page4");
+      
